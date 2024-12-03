@@ -29,6 +29,12 @@ function setup() {
     createButtons(buttonPositions);
 }
 
+function windowResized() {
+    // ridimensiona canvas quando finestra viene ridimensionata
+    resizeCanvas(windowWidth, windowHeight);
+    redraw(); 
+  }
+  
 function createButtons(positions) {
     let buttonWidth = 100;
     let buttonHeight = 40;
@@ -58,6 +64,13 @@ function createButtons(positions) {
 
         button.mousePressed(() => {
             console.log(buttonLabels[i] + ' cliccato');
+            if (buttonLabels[i] === 'COSA SONO') {
+                window.location.href = '../cosasono/index.html';
+            } else if (buttonLabels[i] === 'CHI SIAMO') {
+                window.location.href = '../chisiamo/index.html';
+            } else if (buttonLabels[i] === 'LEGGERE IL GRAFICO') {
+                window.location.href = '../leggereilgrafico/index.html';
+            }
         });
     }
 }
@@ -87,8 +100,6 @@ function draw() {
   fill(0); 
   textFont(fontRubik); 
   text('RIFIUTI\nSPAZIALI', width / 2 - 10, height / 2 + 10); 
-  textSize(113); 
-  stroke(0); 
   strokeWeight(7); 
   fill(255); 
   textFont(fontRubik); 
