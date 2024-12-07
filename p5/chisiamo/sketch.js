@@ -3,23 +3,24 @@ let fontRubik;
 let fontsLoaded = false;
 let imgHome1;
 let imgHome3;
-const scaleFactor = 0.13;
+const scaleFactor = 0.10;
 
 function preload() {
   fontInconsolata = loadFont('../../fonts/Inconsolata.ttf'); 
   fontRubik = loadFont('../../fonts/RubikOne.ttf'); 
-//   imgHome1 = loadImage('../../img/home1.png');
-//   imgHome3 = loadImage('../../img/home3.png');
-//   imgHome2 = loadImage('../../img/home2.png');
-//   imgHome4 = loadImage('../../img/home4.png');
-//   imgHome5 = loadImage('../../img/home5.png');
-//   imgHome6 = loadImage('../../img/home6.png');
-//   imgHome7 = loadImage('../../img/home7.png');
-//   imgHomeastronauta = loadImage('../../img/homeastronauta.png');
+imgele = loadImage('../../img/ele.png');
+imglara = loadImage('../../img/lara.png');
+imgsofi = loadImage('../../img/sofi.png');
+imgjaco = loadImage('../../img/jaco.png');
+imgale = loadImage('../../img/ale.png');
+imgfra = loadImage('../../img/fra.png');
+imgteamluna = loadImage('../../img/teamluna.png');
+imgHomeastronauta = loadImage('../../img/homeastronauta.png');
+imgCosaastronauta = loadImage('../../img/cosaastronauta.png');
 }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight); 
+    createCanvas(windowWidth, 2000); 
     let buttonPositions = [
         { x: width - 540, y: 30 },
         { x: width - 430, y: 30 },
@@ -27,6 +28,12 @@ function setup() {
         { x: width - 115, y: 30 }
     ];
     createButtons(buttonPositions);
+        // Aggiungi questa riga per rendere i pulsanti fissi
+        let buttons = selectAll('button');
+        buttons.forEach(button => {
+            button.style('position', 'fixed');
+        });
+    
 }
 
 function windowResized() {
@@ -110,7 +117,8 @@ function draw() {
 //   image(imgHome5, 1110 + cos(time + 4) * floatAmplitude, 50 + sin(time + 4) * floatAmplitude, imgHome5.width * scaleFactor, imgHome5.height * scaleFactor);
 //   image(imgHome6, 1400 + cos(time + 5) * floatAmplitude, 140 + sin(time + 5) * floatAmplitude, imgHome6.width * scaleFactor, imgHome6.height * scaleFactor);
 //   image(imgHome7, 700 + cos(time + 6) * floatAmplitude, 140 + sin(time + 6) * floatAmplitude, imgHome7.width * scaleFactor, imgHome7.height * scaleFactor);
-//   image(imgHomeastronauta, 1210 + cos(time + 7) * floatAmplitude, 350 + sin(time + 7) * floatAmplitude, imgHomeastronauta.width * scaleFactor, imgHomeastronauta.height * scaleFactor);
+image(imgHomeastronauta, 1210 + cos(time + 7) * floatAmplitude, 350 + sin(time + 7) * floatAmplitude, imgHomeastronauta.width * 0.15, imgHomeastronauta.height * 0.15);
+image(imgCosaastronauta, 210 + cos(time + 2) * floatAmplitude, 100 + sin(time + 2) * floatAmplitude, imgCosaastronauta.width * 0.15, imgCosaastronauta.height * 0.15);
 
   // titolo
   textSize(23); 
@@ -132,11 +140,78 @@ function draw() {
     cursor(ARROW);
   }
 
+  textSize (57)
+  strokeWeight(7);
+  textLeading(57); 
+  stroke (0)
+  fill(255); 
+  textFont(fontRubik); 
+  text('CIAO!', width / 2, 460);
+
   // testino
-  textSize(13);
+  textSize(14);
   textFont(fontInconsolata); 
   textLeading(14);
   noStroke ();
   fill (0);
-  text('Da quando noi umani abbiamo iniziato a esplorare lo spazio, abbiamo\nanche creato un pò di confusione...', width / 2, height / 2 + 170); 
+  text('Siamo studenti del Politecnico di Milano, del corso\ndi Laboratorio di Computer Grafica, Sezione C2,\ndel Secondo Anno di Design della Comunicazione.', width / 2, 550); 
+
+  // Variabili per la posizione dei rettangoli
+  let rectX = 100; // Posizione iniziale X
+  let rectY = 1200; // Aumentata la posizione Y per spostare le card più in basso
+  let rectWidth = 340; // Aumentata la larghezza del rettangolo
+  let rectHeight = 550; // Aumentata l'altezza del rettangolo
+  let images = [imgale, imglara, imgjaco, imgsofi, imgele, imgfra];
+  let labels = ['Alessandro\nBacci', 'Lara\nFrigeni', 'Jacopo\nLeonardi', 'Sofia\nRaimondo', 'Eleonora\nVilla', 'Francesco\nZanchetta'];
+  let descriptions = [
+    'Descrizione Ale',
+    'Descrizione Lara',
+    'Descrizione Jaco',
+    'Descrizione Sofi',
+    'Descrizione Ele',
+    'Descrizione Fra'
+  ];
+
+  // Aggiungi il testo sopra le card
+  textSize(57);
+  textFont(fontRubik);
+  fill(255); // Colore del testo
+  stroke(0); // Colore del bordo
+  strokeWeight(7);
+  text('IL TEAM:', 235, rectY - 80); // Testo allineato a sinistra
+
+  for (let i = 0; i < images.length; i++) {
+    // Disegna il rettangolo
+    fill('#F2F2F2');
+    stroke(0);
+    strokeWeight(2);
+    rect(rectX, rectY, rectWidth, rectHeight, 10); // Angoli arrotondati
+
+    // Disegna l'immagine
+    image(images[i], rectX + (rectWidth - images[i].width * scaleFactor) / 2, rectY + 35, images[i].width * scaleFactor, images[i].height * scaleFactor);
+
+    // Disegna il testo sopra l'immagine
+    textSize(42);
+    textAlign(CENTER);
+    textFont(fontRubik); 
+    textLeading(42);
+    fill(255);
+    stroke(0);
+    strokeWeight(5);
+    text(labels[i], rectX + rectWidth / 2, rectY + images[i].height * scaleFactor + 100);
+
+    // Disegna la descrizione sotto il testo
+    textSize(14);
+    textLeading(14);
+    textFont(fontInconsolata); 
+    noStroke();
+    fill(0);
+    text(descriptions[i], rectX + rectWidth / 2, rectY + images[i].height * scaleFactor + 185);
+
+    // Aggiorna la posizione X per il prossimo rettangolo
+    rectX += rectWidth + 50; // Aumentato lo spazio tra i rettangoli
+  }
+
+  // Aggiungi l'immagine teamluna sotto le card
+  image(imgteamluna, width / 2 - imgteamluna.width * (scaleFactor * 1.3) / 2 - 400, rectY + rectHeight + 60, imgteamluna.width * (scaleFactor * 1.3), imgteamluna.height * (scaleFactor * 1.3));
 }

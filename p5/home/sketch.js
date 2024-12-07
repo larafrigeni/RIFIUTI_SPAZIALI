@@ -106,7 +106,7 @@ function draw() {
   text('RIFIUTI\nSPAZIALI', width / 2, height / 2); 
   
   // testino
-  textSize(13);
+  textSize(14);
   textFont(fontInconsolata); 
   textLeading(14);
   noStroke ();
